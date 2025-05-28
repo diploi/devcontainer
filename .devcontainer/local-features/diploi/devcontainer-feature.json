@@ -1,0 +1,7 @@
+{
+  "id": "diploi",
+  "name": "Diploi",
+  "description": "Configures Diploi specific features.",
+  "version": "1.0.0",
+  "installsAfter": ["ghcr.io/devcontainers/features/git"]
+}

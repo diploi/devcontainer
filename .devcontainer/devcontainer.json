@@ -1,0 +1,88 @@
+{
+  "build": {
+    "dockerfile": "./Dockerfile",
+    "context": "."
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "username": "codespace",
+      "userUid": "1000",
+      "userGid": "1000",
+      "installZsh": "true",
+      "configureZshAsDefaultShell": "true"
+    },
+    // "ghcr.io/devcontainers/features/dotnet:2": {
+    //   "version": "9.0",
+    //   "dotnetRuntimeVersions": "8.0",
+    //   "aspNetCoreRuntimeVersions": "8.0"
+    // },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "24"
+    },
+    "./local-features/bun": "latest",
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.13",
+      "installJupyterlab": "true",
+      "configureJupyterlabAllowOrigin": "*",
+      "useOryxIfAvailable": "false"
+    },
+    "ghcr.io/devcontainers/features/php:1": {
+      "version": "8.4.7",
+      "installComposer": "true"
+    },
+    // "ghcr.io/devcontainers/features/ruby:1": {
+    //   "version": "latest"
+    // },
+    // "ghcr.io/devcontainers/features/java:1": {
+    //   "version": "24",
+    //   "additionalVersions": "21",
+    //   "installGradle": "true",
+    //   "installMaven": "true"
+    // },
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest"
+      // "ppa": "false"
+    },
+    // "ghcr.io/devcontainers/features/git-lfs:1": {
+    //   "version": "latest"
+    // },
+    // "ghcr.io/devcontainers/features/go:1": {
+    //   "version": "latest"
+    // },
+    "ghcr.io/coder/devcontainer-features/code-server:1": {
+      "appName": "Diploi",
+      "disableWorkspaceTrust": "true",
+      "disableGettingStartedOverride": "true",
+      "disableUpdateCheck": "true",
+      "disableTelemetry": "true",
+      "auth": "none",
+      "host": "0.0.0.0",
+      "port": "3001",
+      "workspace": "/app"
+    },
+    "./local-features/code-server-service": "latest",
+    // "ghcr.io/devcontainers/features/oryx:1": "latest"
+    "./local-features/diploi": "latest"
+  },
+  "overrideFeatureInstallOrder": [
+    "ghcr.io/devcontainers/features/common-utils",
+    "ghcr.io/devcontainers/features/git",
+    "ghcr.io/devcontainers/features/dotnet",
+    "ghcr.io/devcontainers/features/node",
+    "./local-features/bun",
+    "ghcr.io/devcontainer-community/devcontainer-features/bun.sh",
+    "ghcr.io/devcontainers/features/python",
+    "ghcr.io/devcontainers/features/php",
+    "ghcr.io/devcontainers/features/ruby",
+    "ghcr.io/devcontainers/features/java",
+    "ghcr.io/devcontainers/features/git-lfs",
+    "ghcr.io/devcontainers/features/go",
+    "ghcr.io/coder/devcontainer-features/code-server",
+    "./local-features/code-server-service",
+    "./local-features/diploi"
+  ],
+  "remoteUser": "codespace",
+  "containerUser": "codespace",
+  "forwardPorts": [],
+  "customizations": {}
+}

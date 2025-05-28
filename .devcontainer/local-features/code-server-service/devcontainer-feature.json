@@ -1,0 +1,7 @@
+{
+  "id": "code-server-service",
+  "name": "Code Server Service",
+  "description": "Will create a supervisor config entry for the Code Server.",
+  "version": "1.0.0",
+  "installsAfter": ["ghcr.io/coder/devcontainer-features/code-server"]
+}
