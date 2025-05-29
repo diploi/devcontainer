@@ -107,3 +107,43 @@ EOT
 cat <<EOF >> /home/$_CONTAINER_USER/.zshrc
 cat /etc/motd
 EOF
+
+# Create the runonce.sh script
+cat > /usr/local/bin/diploi-runonce.sh <<EOT
+#!/bin/sh
+
+#
+# Script to initialize a new development environment
+#
+
+if [ -d "/home/diploi-tmp" ] && [ -z "$( ls -A \'/home/$_CONTAINER_USER\' )" ]; then
+  # Copy home directory files from the Docker build if they exist and the actual home folder is empty
+  echo "First boot detected. Will copy the home folder contents."
+  mv -v /home/diploi-tmp/.[!.]* /home/$_CONTAINER_USER/
+  rm -rf /home/diploi-tmp
+fi
+
+# Start the code-server
+supervisorctl start code-server
+
+EOT
+chmod +x /usr/local/bin/diploi-runonce.sh
+
+# Create a supervisor task for the runonce.sh
+cat <<EOT >> /etc/supervisord.conf
+; Added by diploi feature
+[program:runonce]
+directory=/home/$_CONTAINER_USER
+command=sh /usr/local/bin/diploi-runonce.sh
+autostart=true
+autorestart=false
+startretries=0
+stdout_logfile=/var/log/runonce.log
+stderr_logfile=/var/log/runonce.log
+
+EOT
+
+# Move home folder contents to a temporary folder from which they will be copied to the mount
+mv /home/$_CONTAINER_USER /home/diploi-tmp
+mkdir /home/$_CONTAINER_USER
+chown $_CONTAINER_USER:$_CONTAINER_USER /home/$_CONTAINER_USER
