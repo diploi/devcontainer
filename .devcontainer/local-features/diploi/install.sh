@@ -119,8 +119,7 @@ cat > /usr/local/bin/diploi-runonce.sh <<EOT
 if [ -d "/home/diploi-tmp" ] && [ -z "\$( ls -A '/home/$_CONTAINER_USER' )" ]; then
   # Copy home directory files from the Docker build if they exist and the actual home folder is empty
   echo "First boot detected. Will copy the home folder contents."
-  shopt -s dotglob
-  mv -vn /home/diploi-tmp/* /home/$_CONTAINER_USER/
+  mv -vn /home/diploi-tmp/.[!.]* /home/$_CONTAINER_USER/
 fi
 
 rm -rf /home/diploi-tmp
