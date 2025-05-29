@@ -116,12 +116,14 @@ cat > /usr/local/bin/diploi-runonce.sh <<EOT
 # Script to initialize a new development environment
 #
 
-if [ -d "/home/diploi-tmp" ] && [ -z "$( ls -A \'/home/$_CONTAINER_USER\' )" ]; then
+if [ -d "/home/diploi-tmp" ] && [ -z "\$( ls -A '/home/$_CONTAINER_USER' )" ]; then
   # Copy home directory files from the Docker build if they exist and the actual home folder is empty
   echo "First boot detected. Will copy the home folder contents."
-  mv -v /home/diploi-tmp/.[!.]* /home/$_CONTAINER_USER/
-  rm -rf /home/diploi-tmp
+  shopt -s dotglob
+  mv -vn /home/diploi-tmp/* /home/$_CONTAINER_USER/
 fi
+
+rm -rf /home/diploi-tmp
 
 # Start the code-server
 supervisorctl start code-server
