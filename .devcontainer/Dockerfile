@@ -32,7 +32,9 @@ RUN apt-get update \
         rsync \
         zip \
         jq \
-        curl
+        curl \
+        # Required for VS Code SSH remote
+        netcat-openbsd
 
 # Verify expected build and debug tools are present
 RUN apt-get -y install build-essential cmake cppcheck valgrind clang lldb llvm gdb python3-dev \

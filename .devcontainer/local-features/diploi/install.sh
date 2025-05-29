@@ -93,14 +93,13 @@ cat > /etc/motd <<'EOT'
  [0;37m👋 Welcome to your Diploi development environment!
     - Your app processes are [1;37mnot[0;37m running here (like node or bun).
       To manage them, use the Diploi dashboard.
-    - You can run commands like npm install here.
+    - You can run commands like "npm install" here.
     - You can edit your code here. Changes are instantly reflected to all components.
 
  👇 Learn more about remote development with Diploi:
     [38;5;128mhttps://diploi.com/dev[0;37m
 
  [1;37mHappy coding! ✨
-
 
 EOT
 
