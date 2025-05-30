@@ -130,20 +130,6 @@ supervisorctl start code-server
 EOT
 chmod +x /usr/local/bin/diploi-runonce.sh
 
-# Create a supervisor task for the runonce.sh
-cat <<EOT >> /etc/supervisord.conf
-; Added by diploi feature
-[program:runonce]
-directory=/home/$_CONTAINER_USER
-command=sh /usr/local/bin/diploi-runonce.sh
-autostart=true
-autorestart=false
-startretries=0
-stdout_logfile=/var/log/runonce.log
-stderr_logfile=/var/log/runonce.log
-
-EOT
-
 # Move home folder contents to a temporary folder from which they will be copied to the mount
 mv /home/$_CONTAINER_USER /home/diploi-tmp
 mkdir /home/$_CONTAINER_USER

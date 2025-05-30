@@ -9,7 +9,7 @@ directory=/app
 user=$_CONTAINER_USER
 environment=HOME="/home/$_CONTAINER_USER"
 command=/usr/local/bin/code-server-entrypoint
-autostart=false
+autostart=true
 autorestart=true
 stopasgroup=true
 killasgroup=true
