@@ -108,6 +108,11 @@ cat <<EOF >> /home/$_CONTAINER_USER/.zshrc
 cat /etc/motd
 EOF
 
+# Move to /app on login
+cat <<EOF >> /home/$_CONTAINER_USER/.zshrc
+cd /app
+EOF
+
 # Create the runonce.sh script
 cat > /usr/local/bin/diploi-runonce.sh <<EOT
 #!/bin/sh
@@ -117,7 +122,7 @@ cat > /usr/local/bin/diploi-runonce.sh <<EOT
 #
 
 if [ -d "/home/diploi-tmp" ] && [ -z "\$( ls -A '/home/diploi-tmp' )" ]; then
-  # Copy home directory files from the Docker build if they exist and the actual home folder is empty
+  # Copy home directory files from the Docker build if the actual home folder is empty
   echo "First boot detected. Will copy the home folder contents."
   mv -n /home/$_CONTAINER_USER/.[!.]* /home/diploi-tmp/
 else
