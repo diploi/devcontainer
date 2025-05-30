@@ -116,20 +116,13 @@ cat > /usr/local/bin/diploi-runonce.sh <<EOT
 # Script to initialize a new development environment
 #
 
-if [ -d "/home/diploi-tmp" ] && [ -z "\$( ls -A '/home/$_CONTAINER_USER' )" ]; then
+if [ -d "/home/diploi-tmp" ] && [ -z "\$( ls -A '/home/diploi-tmp' )" ]; then
   # Copy home directory files from the Docker build if they exist and the actual home folder is empty
   echo "First boot detected. Will copy the home folder contents."
-  mv -n /home/diploi-tmp/.[!.]* /home/$_CONTAINER_USER/
+  mv -n /home/$_CONTAINER_USER/.[!.]* /home/diploi-tmp/
 else
   echo "Not the first boot. Skipping home folder init."
 fi
 
-rm -rf /home/diploi-tmp
-
 EOT
 chmod +x /usr/local/bin/diploi-runonce.sh
-
-# Move home folder contents to a temporary folder from which they will be copied to the mount
-mv /home/$_CONTAINER_USER /home/diploi-tmp
-mkdir /home/$_CONTAINER_USER
-chown $_CONTAINER_USER:$_CONTAINER_USER /home/$_CONTAINER_USER
