@@ -120,12 +120,11 @@ if [ -d "/home/diploi-tmp" ] && [ -z "\$( ls -A '/home/$_CONTAINER_USER' )" ]; t
   # Copy home directory files from the Docker build if they exist and the actual home folder is empty
   echo "First boot detected. Will copy the home folder contents."
   mv -vn /home/diploi-tmp/.[!.]* /home/$_CONTAINER_USER/
+then
+  echo "Not the first boot. Skipping home folder init."
 fi
 
 rm -rf /home/diploi-tmp
-
-# Start the code-server
-supervisorctl start code-server
 
 EOT
 chmod +x /usr/local/bin/diploi-runonce.sh
