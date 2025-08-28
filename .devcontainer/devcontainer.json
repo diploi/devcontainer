@@ -62,8 +62,8 @@
     },
     "./local-features/code-server-service": "latest",
     // "ghcr.io/devcontainers/features/oryx:1": "latest"
-    "./local-features/diploi": "latest",
-    "./local-features/direnv": "latest"
+    "./local-features/direnv": "latest",
+    "./local-features/diploi": "latest"
   },
   "overrideFeatureInstallOrder": [
     "ghcr.io/devcontainers/features/common-utils",
@@ -80,8 +80,8 @@
     "ghcr.io/devcontainers/features/go",
     "ghcr.io/coder/devcontainer-features/code-server",
     "./local-features/code-server-service",
-    "./local-features/diploi",
-    "./local-features/direnv"
+    "./local-features/direnv",
+    "./local-features/diploi"
   ],
   "remoteUser": "codespace",
   "containerUser": "codespace",
