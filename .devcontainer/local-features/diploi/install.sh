@@ -2,6 +2,9 @@
 
 set -eax
 
+# Fix permissions on the share folder
+chown $_CONTAINER_USER:$_CONTAINER_USER /home/$_CONTAINER_USER/.local/share
+
 # Create the diploi-credential-helper
 cat > /usr/local/bin/diploi-credential-helper <<'EOT'
 #!/bin/sh
