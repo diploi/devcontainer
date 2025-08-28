@@ -20,11 +20,8 @@
       "version": "24"
     },
     "./local-features/bun": "latest",
-    "ghcr.io/devcontainers/features/python:1": {
-      "version": "3.13",
-      "installJupyterlab": "true",
-      "configureJupyterlabAllowOrigin": "*",
-      "useOryxIfAvailable": "false"
+    "ghcr.io/va-h/devcontainers-features/uv:1": {
+      "version": "latest"
     },
     "ghcr.io/devcontainers/features/php:1": {
       "version": "8.4.7",
@@ -72,7 +69,7 @@
     "ghcr.io/devcontainers/features/node",
     "./local-features/bun",
     "ghcr.io/devcontainer-community/devcontainer-features/bun.sh",
-    "ghcr.io/devcontainers/features/python",
+    "ghcr.io/va-h/devcontainers-features/uv:1",
     "ghcr.io/devcontainers/features/php",
     "ghcr.io/devcontainers/features/ruby",
     "ghcr.io/devcontainers/features/java",
