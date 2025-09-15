@@ -46,6 +46,9 @@
     // "ghcr.io/devcontainers/features/go:1": {
     //   "version": "latest"
     // },
+    "ghcr.io/devcontainers-community/features/deno": {
+      "version": "2.5.0"
+    },
     "ghcr.io/coder/devcontainer-features/code-server:1": {
       "appName": "Diploi",
       "disableWorkspaceTrust": "true",
@@ -76,6 +79,7 @@
     "ghcr.io/devcontainers/features/java",
     "ghcr.io/devcontainers/features/git-lfs",
     "ghcr.io/devcontainers/features/go",
+    "ghcr.io/devcontainers-community/features/deno",
     "ghcr.io/coder/devcontainer-features/code-server",
     "./local-features/code-server-service",
     "./local-features/direnv",
