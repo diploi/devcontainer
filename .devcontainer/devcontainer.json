@@ -60,6 +60,7 @@
     "./local-features/code-server-service": "latest",
     // "ghcr.io/devcontainers/features/oryx:1": "latest"
     "./local-features/direnv": "latest",
+    "./local-features/postgres-client": "latest",
     "./local-features/diploi": "latest"
   },
   "overrideFeatureInstallOrder": [
@@ -78,6 +79,7 @@
     "ghcr.io/coder/devcontainer-features/code-server",
     "./local-features/code-server-service",
     "./local-features/direnv",
+    "./local-features/postgres-client",
     "./local-features/diploi"
   ],
   "remoteUser": "codespace",
