@@ -13,14 +13,14 @@ autostart=true
 autorestart=true
 stopasgroup=true
 killasgroup=true
+priority=10
+
+[program:install-extensions]
+command=/bin/sh -c "sleep 25 && sudo -u ${_CONTAINER_USER} bash -c 'code-server --list-extensions | grep -q Continue.continue || code-server --install-extension Continue.continue' && echo '✅ Extension installed successfully.'"
+autostart=true
+autorestart=false
+priority=20
+stdout_logfile=/var/log/supervisor/install-extensions.log
+stderr_logfile=/var/log/supervisor/install-extensions.err.log
 
 EOT
-
-# Wait for code-server to start
-echo "Waiting for code-server to start..."
-sleep 20 
-
-# Install VS Code extension as the container user
-sudo -u "$_CONTAINER_USER" code-server --install-extension Continue.continue
-
-echo "Extension installed successfully."
