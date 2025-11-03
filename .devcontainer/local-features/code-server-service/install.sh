@@ -15,3 +15,12 @@ stopasgroup=true
 killasgroup=true
 
 EOT
+
+# Wait for code-server to start
+echo "Waiting for code-server to start..."
+sleep 20 
+
+# Install VS Code extension as the container user
+sudo -u "$_CONTAINER_USER" code-server --install-extension Continue.continue
+
+echo "Extension installed successfully."
