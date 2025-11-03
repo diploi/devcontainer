@@ -16,8 +16,7 @@ killasgroup=true
 priority=10
 
 [program:install-extensions]
-command=/bin/sh -c 'date; echo "Sleeping 40 seconds..."; sleep 40; date; echo "Running install"; code-server --install-extension Continue.continue; echo "✅ Extension installed successfully."'
-user=$_CONTAINER_USER
+command=/bin/sh -c 'date; echo "Sleeping 20 seconds..."; sleep 20; date; echo "Running install"; sudo -u ${_CONTAINER_USER} bash -c "code-server --install-extension Continue.continue"; echo "✅ Extension installed successfully."'
 autostart=true
 autorestart=false
 priority=20
