@@ -54,7 +54,7 @@ RUN rm -rf /tmp/scripts
 # Create diploi and dip scripts for running devpod-cli (javascript is mounted at runtime into the container)
 RUN echo '#!/bin/bash' > /usr/local/bin/diploi \
     && echo 'bun /usr/local/lib/diploi-cli/diploi.js "$@"' >> /usr/local/bin/diploi \
-    && chmod +x ../core/bundle/exe/devpod-cli/diploi \
+    && chmod +x /usr/local/bin/diploi \
     && cp /usr/local/bin/diploi /usr/local/bin/dip
 
 
