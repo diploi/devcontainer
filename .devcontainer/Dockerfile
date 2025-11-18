@@ -52,9 +52,9 @@ COPY supervisord.conf /etc/supervisord.conf
 RUN rm -rf /tmp/scripts
 
 # Create diploi and dip scripts for running devpod-cli (javascript is mounted at runtime into the container)
-RUN echo '#!/bin/bash' > /usr/local/bin/diploi 
-    && echo 'bun /usr/local/lib/diploi-cli/diploi.js "$@"' >> /usr/local/bin/diploi
-    && chmod +x ../core/bundle/exe/devpod-cli/diploi
+RUN echo '#!/bin/bash' > /usr/local/bin/diploi \
+    && echo 'bun /usr/local/lib/diploi-cli/diploi.js "$@"' >> /usr/local/bin/diploi \
+    && chmod +x ../core/bundle/exe/devpod-cli/diploi \
     && cp /usr/local/bin/diploi /usr/local/bin/dip
 
 
