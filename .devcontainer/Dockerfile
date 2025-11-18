@@ -51,6 +51,13 @@ COPY supervisord.conf /etc/supervisord.conf
 # Remove scripts now that we're done with them
 RUN rm -rf /tmp/scripts
 
+# Create diploi and dip scripts for running devpod-cli (javascript is mounted at runtime into the container)
+RUN echo '#!/bin/bash' > /usr/local/bin/diploi 
+    && echo 'bun /usr/local/lib/diploi-cli/diploi.js "$@"' >> /usr/local/bin/diploi
+    && chmod +x ../core/bundle/exe/devpod-cli/diploi
+    && cp /usr/local/bin/diploi /usr/local/bin/dip
+
+
 # Clean up
 RUN apt-get autoremove -y \
     && apt-get clean -y \
