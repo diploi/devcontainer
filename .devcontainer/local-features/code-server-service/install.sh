@@ -14,11 +14,11 @@ autorestart=true
 stopasgroup=true
 killasgroup=true
 priority=10
-stout_logfile=/var/log/supervisor/code-server.log
+stdout_logfile=/var/log/supervisor/code-server.log
 stderr_logfile=/var/log/supervisor/code-server.err.log
 
 [program:install-extensions]
-command=/bin/sh -c 'date; echo "Sleeping 5 seconds..."; sleep 5; date; echo "Running install"; sudo -u ${$USERNAME} bash -c "code-server --install-extension Continue.continue --force" && echo "✅ Extension installed successfully."'
+command=/bin/sh -c 'date; echo "Sleeping 5 seconds..."; sleep 5; date; echo "Running install"; sudo -u $USERNAME bash -c "code-server --install-extension Continue.continue --force" && echo "✅ Extension installed successfully."'
 autostart=true
 autorestart=true
 priority=20
