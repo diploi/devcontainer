@@ -134,32 +134,32 @@ else
 fi
 EOT
 
-# Make config.yaml file and write it to ~/.continue
 echo "Creating Continue configuration file..."
 mkdir -p /home/$_CONTAINER_USER/.continue
 
-cat > /home/$_CONTAINER_USER/.continue/config.yaml <<EOF
+# TODO: Make config.yaml file and write it to ~/.continue
+# cat > /home/$_CONTAINER_USER/.continue/config.yaml <<EOF
 
-name: Diploi Development Continue Configuration
-version: 1.0.0
-schema: v1
-models:
-  - name: GPT-4o-mini
-    provider: openai
-    model: gpt-4o-mini
-    apiKey: "sk-TESTKEY"
-    apiBase: https://g.diploi.dev/api/v1
-    defaultCompletionOptions:
-      temperature: 0.5
-      maxTokens: 2000
-    roles:
-      - chat
-      - edit
-  - name: gemma3:4b
-    provider: openai
-    model: gemma3:4b
-    apiBase: https://g.diploi.dev/api/v1
-    apiKey: "sk-TESTKEY"
-EOF
+# name: Diploi Development Continue Configuration
+# version: 1.0.0
+# schema: v1
+# models:
+#   - name: GPT-4o-mini
+#     provider: openai
+#     model: gpt-4o-mini
+#     apiKey: "sk-TESTKEY"
+#     apiBase: https://g.diploi.dev/api/v1
+#     defaultCompletionOptions:
+#       temperature: 0.5
+#       maxTokens: 2000
+#     roles:
+#       - chat
+#       - edit
+#   - name: gemma3:4b
+#     provider: openai
+#     model: gemma3:4b
+#     apiBase: https://g.diploi.dev/api/v1
+#     apiKey: "sk-TESTKEY"
+# EOF
 
 chown -R $_CONTAINER_USER:$_CONTAINER_USER /home/$_CONTAINER_USER/.continue
