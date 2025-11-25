@@ -129,6 +129,7 @@ if [ -d "/home/diploi-tmp" ] && [ -z "\$( ls -A '/home/diploi-tmp' )" ]; then
   # Copy home directory files from the Docker build if the actual home folder is empty
   echo "First boot detected. Will copy the home folder contents."
   mv -n /home/$_CONTAINER_USER/.[!.]* /home/diploi-tmp/
+
 else
   echo "Not the first boot. Skipping home folder init."
 fi
@@ -138,3 +139,41 @@ echo "Creating Continue configuration file..."
 mkdir -p /home/$_CONTAINER_USER/.continue
 
 chown -R $_CONTAINER_USER:$_CONTAINER_USER /home/$_CONTAINER_USER/.continue
+
+
+# Create the diploi-continue-setup.sh script
+cat > /usr/local/bin/diploi-continue-setup.sh <<EOT
+#!/bin/sh
+
+#
+# Script to setup Continue in the development environment
+#
+if [! mkdir -p /home/diploi-tmp/.continue ]; then
+  echo "Could not create /home/diploi-tmp/.continue folder"
+  exit 1
+fi
+
+if [! mkdir -p /home/diploi-tmp/.continue/rules ]; then
+  echo "Could not create /home/diploi-tmp/.continue/rules folder"
+  exit 1
+fi
+
+if [ ! -f /home/diploi-tmp/.continue/config.yaml ]; then  
+  echo "Creating Continue config file..."
+  cp /continue-readonly/config.yaml /home/diploi-tmp/.continue/config.yaml
+  
+  echo "Setting permissions for Continue config folder..."
+  chown -R 1000:1000 /home/diploi-tmp/.continue && chmod -R u+w /home/diploi-tmp/.continue
+fi
+
+if [ ! -f /home/diploi-tmp/.continue/rules/DiploiAISystemRules.md ]; then  
+  echo "Creating Diploi Continue system rule file..."
+  cp /diploi-ai-rules/DiploiAISystemRules.md /home/diploi-tmp/.continue/rules/DiploiAISystemRules.md
+  
+  echo "Setting permissions for Continue rules folder..."
+  chown -R 1000:1000 /home/diploi-tmp/.continue/rules
+fi
+
+EOT
+
+
