@@ -269,7 +269,7 @@ if [ ! -d /home/diploi-tmp/.continue/rules ]; then
   mkdir -p /home/diploi-tmp/.continue/rules
 fi
 
-if [ ! -f /home/diploi-tmp/.continue/rules/DiploiAISystemRules.md ]; then
+if [ ! -f /home/diploi-tmp/.continue/rules/DiploiAISystemRules.md ] && [ -f /home/$_CONTAINER_USER/DiploiAISystemRules.md ]; then
   echo "Creating Diploi Continue system rule file..."
   cp /home/$_CONTAINER_USER/DiploiAISystemRules.md /home/diploi-tmp/.continue/rules/DiploiAISystemRules.md
   echo "Setting permissions for Continue rules folder..."
