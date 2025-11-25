@@ -250,13 +250,8 @@ cat > /usr/local/bin/diploi-continue-setup.sh <<EOT
 #
 # Script to setup Continue in the development environment
 #
-if [! mkdir -p /home/diploi-tmp/.continue ]; then
+if ! mkdir -p /home/diploi-tmp/.continue ; then
   echo "Could not create /home/diploi-tmp/.continue folder"
-  exit 1
-fi
-
-if [! mkdir -p /home/diploi-tmp/.continue/rules ]; then
-  echo "Could not create /home/diploi-tmp/.continue/rules folder"
   exit 1
 fi
 
@@ -268,15 +263,19 @@ if [ ! -f /home/diploi-tmp/.continue/config.yaml ]; then
   chown -R 1000:1000 /home/diploi-tmp/.continue && chmod -R u+w /home/diploi-tmp/.continue
 fi
 
-if [ ! -f /home/diploi-tmp/.continue/rules/DiploiAISystemRules.md ]; then  
+# Ensure the rules directory exists before copying
+if [ ! -d /home/diploi-tmp/.continue/rules ]; then
+  echo "Creating Continue rules directory..."
+  mkdir -p /home/diploi-tmp/.continue/rules
+fi
+
+if [ ! -f /home/diploi-tmp/.continue/rules/DiploiAISystemRules.md ]; then
   echo "Creating Diploi Continue system rule file..."
   cp /home/$_CONTAINER_USER/DiploiAISystemRules.md /home/diploi-tmp/.continue/rules/DiploiAISystemRules.md
-  
   echo "Setting permissions for Continue rules folder..."
   chown -R 1000:1000 /home/diploi-tmp/.continue/rules
   chmod -R u-w /home/diploi-tmp/.continue/rules/DiploiAISystemRules.md
 fi
 
 EOT
-
 
