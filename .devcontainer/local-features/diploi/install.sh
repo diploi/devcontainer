@@ -270,7 +270,7 @@ fi
 
 if [ ! -f /home/diploi-tmp/.continue/rules/DiploiAISystemRules.md ]; then  
   echo "Creating Diploi Continue system rule file..."
-  cp /home/diploi-tmp/DiploiAISystemRules.md /home/diploi-tmp/.continue/rules/DiploiAISystemRules.md
+  cp /home/$_CONTAINER_USER/DiploiAISystemRules.md /home/diploi-tmp/.continue/rules/DiploiAISystemRules.md
   
   echo "Setting permissions for Continue rules folder..."
   chown -R 1000:1000 /home/diploi-tmp/.continue/rules
