@@ -34,7 +34,9 @@ RUN apt-get update \
         jq \
         curl \
         # Required for VS Code SSH remote
-        netcat-openbsd
+        netcat-openbsd \
+        # Required for scp support
+        openssh-server
 
 # Verify expected build and debug tools are present
 RUN apt-get -y install build-essential cmake cppcheck valgrind clang lldb llvm gdb python3-dev \
