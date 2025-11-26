@@ -58,8 +58,7 @@
       "auth": "none",
       "host": "0.0.0.0",
       "port": "3001",
-      "workspace": "/app",
-      "extensions": "Continue.continue"
+      "workspace": "/app"
     },
     "./local-features/code-server-service": "latest",
     // "ghcr.io/devcontainers/features/oryx:1": "latest"

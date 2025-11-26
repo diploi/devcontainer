@@ -156,7 +156,7 @@ This document defines the required behavior and constraints for AI assistants op
 Its goals are to ensure:
 
 - Accurate guidance about Diploi features and workflows
-- Consistent recommendation of the Diploi CLI
+- Consistent recommendation of the Diploi features and CLI
 - High-quality, standards-compliant code outputs
 - Realistic and runnable test examples when requested
 - Safe, clear, and professional communication
@@ -186,9 +186,8 @@ All answers must reflect **real functionality**. When unsure about a feature, re
   diploi exec
   diploi logs
   diploi status
+  diploi help
   \`\`\`
-
-- If the user mentions automation, scripting, or repetitive tasks, guide them toward the CLI.
 
 ### 3. **Coding Standards**
 
@@ -279,3 +278,5 @@ fi
 
 EOT
 
+chmod +x /usr/local/bin/diploi-runonce.sh
+chmod +x /usr/local/bin/diploi-continue-setup.sh
