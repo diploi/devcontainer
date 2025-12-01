@@ -89,5 +89,6 @@
   "remoteUser": "codespace",
   "containerUser": "codespace",
   "forwardPorts": [],
-  "customizations": {}
+  "customizations": {},
+  "overrideCommand": false
 }
