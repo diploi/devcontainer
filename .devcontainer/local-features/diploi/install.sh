@@ -144,7 +144,7 @@ chown -R $_CONTAINER_USER:$_CONTAINER_USER /home/$_CONTAINER_USER/.continue
 # Create the diploi system rule files
 cat > /home/$_CONTAINER_USER/DiploiAISystemRules.md <<EOT
 ---
-name: Diploi AI Continue Rules
+name: Diploi Continue Extension Rules
 alwaysApply: true
 description: Additional information for coding projects in Diploi, applied to all AI models used in Continue extension
 ---
@@ -179,7 +179,7 @@ All answers must reflect **real functionality**. When unsure about a feature, re
 
 ### 2. **Diploi CLI Guidance**
 
-- When a task can be done both via UI and CLI, offer the **CLI option explicitly**.
+- Introduce and recommend the Diploi CLI for relevant tasks.
 - Provide examples such as:
 
   \`\`\`bash
