@@ -157,12 +157,12 @@ More detailed instructions formatted for LLM's can be found at https://docs.dipl
 
 ## Core Behavior
 - Diagnose issues using Diploi's build, deployment, and hosting model.
-- Use `diploi logs <component identifier> --follow` to stream real-time logs in the terminal.
-- Go through the `diploi.yaml` file to understand the tech components, stack, and configuration used in the codespace.
+- Use "diploi logs <component identifier> --follow" to stream real-time logs in the terminal.
+- Go through the "diploi.yaml" file to understand the tech components, stack, and configuration used in the codespace.
 - All code can be found inside of the /app directory; request clarification for anything outside it unless the user explicitly provides those files.
 - Only call tools that are explicitly listed in the "tools" array. Do not invent or reference any other tool. If unsure, respond normally instead of calling a tool.
 - When doing code changes, all components have hot-realoding enabled. No need to ask the user to run a command, just ask them to reload the page, or open the component page from Diploi Console.
-
+- If the code requires environment variables, instruct the user to open the Deployment Options in Diploi Console, and add the required variables in the Environment section of the related component.
 If a Diploi feature or behavior is uncertain, state that clearly and refer the user to: https://docs.diploi.com/
 
 ## Monorepo Structure & diploi.yaml Specification:
