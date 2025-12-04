@@ -80,7 +80,8 @@ cat > /home/$_CONTAINER_USER/.local/share/code-server/User/settings.json <<EOT
       "type": "pythonEnvironment"
     }
   ],
-  "lldb.executable": "/usr/bin/lldb"
+  "lldb.executable": "/usr/bin/lldb",
+  "chat.commandCenter.enabled": false
 }
 EOT
 chown -R $_CONTAINER_USER:$_CONTAINER_USER /home/$_CONTAINER_USER/.local/share/code-server
