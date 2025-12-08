@@ -11,11 +11,11 @@
       "installZsh": "true",
       "configureZshAsDefaultShell": "true"
     },
-    // "ghcr.io/devcontainers/features/dotnet:2": {
-    //   "version": "9.0",
-    //   "dotnetRuntimeVersions": "8.0",
-    //   "aspNetCoreRuntimeVersions": "8.0"
-    // },
+    "ghcr.io/devcontainers/features/dotnet:2": {
+      "version": "10.0",
+      "dotnetRuntimeVersions": "10.0",
+      "aspNetCoreRuntimeVersions": "10.0"
+    },
     "ghcr.io/devcontainers/features/node:1": {
       "version": "24"
     },
