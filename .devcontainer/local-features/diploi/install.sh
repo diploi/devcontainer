@@ -81,7 +81,8 @@ cat > /home/$_CONTAINER_USER/.local/share/code-server/User/settings.json <<EOT
     }
   ],
   "lldb.executable": "/usr/bin/lldb",
-  "chat.commandCenter.enabled": false
+  "chat.commandCenter.enabled": false,
+  "keyboard.dispatch": "keyCode"
 }
 EOT
 chown -R $_CONTAINER_USER:$_CONTAINER_USER /home/$_CONTAINER_USER/.local/share/code-server
