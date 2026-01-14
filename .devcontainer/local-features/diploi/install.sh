@@ -143,8 +143,7 @@ fi
 EOT
 
 # Setup PNPM
-SHELL=/usr/bin/zsh
-sudo -u $_CONTAINER_USER pnpm setup
+sudo -u $_CONTAINER_USER -H zsh -lc "COREPACK_ENABLE_DOWNLOAD_PROMPT=0 . /usr/local/share/nvm/nvm.sh && corepack enable pnpm && SHELL=/usr/bin/zsh pnpm setup"
 
 echo "Creating Continue configuration file..."
 mkdir -p /home/$_CONTAINER_USER/.continue
