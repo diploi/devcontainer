@@ -109,6 +109,11 @@ cat > /etc/motd <<'EOT'
 
 EOT
 
+# Set the SHELL ENV on login
+cat <<EOF >> /home/$_CONTAINER_USER/.zshrc
+export SHELL=/usr/bin/zsh
+EOF
+
 # Print the welcome message on login
 cat <<EOF >> /home/$_CONTAINER_USER/.zshrc
 cat /etc/motd
@@ -136,6 +141,10 @@ else
   echo "Not the first boot. Skipping home folder init."
 fi
 EOT
+
+# Setup PNPM
+SHELL=/usr/bin/zsh
+sudo -u $_CONTAINER_USER pnpm setup
 
 echo "Creating Continue configuration file..."
 mkdir -p /home/$_CONTAINER_USER/.continue
