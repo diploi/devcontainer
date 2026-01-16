@@ -143,7 +143,9 @@ fi
 EOT
 
 # Setup PNPM
-sudo -u $_CONTAINER_USER -H zsh -lc "COREPACK_ENABLE_DOWNLOAD_PROMPT=0 . /usr/local/share/nvm/nvm.sh && corepack enable pnpm && SHELL=/usr/bin/zsh pnpm setup"
+mkdir -p /home/$_CONTAINER_USER/.pnpm-store
+chown $_CONTAINER_USER:$_CONTAINER_USER /home/$_CONTAINER_USER/.pnpm-store
+sudo -u $_CONTAINER_USER -H zsh -lc "COREPACK_ENABLE_DOWNLOAD_PROMPT=0 . /usr/local/share/nvm/nvm.sh && corepack enable pnpm && SHELL=/usr/bin/zsh pnpm setup && pnpm config set node-linker=hoisted --global && pnpm config set store-dir /home/$_CONTAINER_USER/.pnpm-store --global"
 
 echo "Creating Continue configuration file..."
 mkdir -p /home/$_CONTAINER_USER/.continue
