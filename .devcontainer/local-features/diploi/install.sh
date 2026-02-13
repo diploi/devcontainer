@@ -181,5 +181,22 @@ fi
 
 EOT
 
+# Create Openclaw cli script for Diploi
+cat > /usr/local/bin/openclaw <<EOT
+#!/bin/sh
+
+cat <<'MESSAGE'
+OpenClaw CLI is not supported in this DevPod terminal.
+
+How to execute OpenClaw CLI commands:
+  1) Please go to the OpenClaw Deployment page.
+  2) Click "Connect" button under the OpenClaw component to copy the ssh command.
+  3) Paste the command to your local terminal to establish the connection.
+  4) After it connects, you can run the OpenClaw CLI there.
+MESSAGE
+
+EOT
+
+chmod +x /usr/local/bin/openclaw
 chmod +x /usr/local/bin/diploi-runonce.sh
 chmod +x /usr/local/bin/diploi-continue-setup.sh
