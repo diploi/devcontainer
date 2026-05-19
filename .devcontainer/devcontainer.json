@@ -30,6 +30,9 @@
     "ghcr.io/devcontainers-extra/features/supabase-cli:1": {
       "version": "v2.88.1"
     },
+    "ghcr.io/jsburckhardt/devcontainer-features/opencode:1": {
+      "version": "1.1.1"
+    },
     // "ghcr.io/devcontainers/features/ruby:1": {
     //   "version": "latest"
     // },
