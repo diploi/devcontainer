@@ -18,7 +18,7 @@ stout_logfile=/var/log/supervisor/code-server.log
 stderr_logfile=/var/log/supervisor/code-server.err.log
 
 [program:install-extensions]
-command=/bin/sh -c 'echo "Running install"; sudo -u ${_CONTAINER_USER} bash -c "code-server --install-extension Continue.continue@1.3.38" && echo "✅ Extension installed successfully."'
+command=/bin/sh -c 'echo "Installing Continue and OpenCode"; sudo -u ${_CONTAINER_USER} bash -c "code-server --install-extension Continue.continue@1.3.38 && code-server --install-extension sst-dev.opencode@0.0.13" && echo "✅ Extension installed successfully."'
 autostart=true
 autorestart=false
 priority=20
