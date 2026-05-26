@@ -2,9 +2,9 @@
 
 set -eax
 
-# Fix permissions on the share folder
+# Fix permissions on the local folder
 mkdir -p /home/$_CONTAINER_USER/.local/share
-chown $_CONTAINER_USER:$_CONTAINER_USER /home/$_CONTAINER_USER/.local/share
+chown -R $_CONTAINER_USER:$_CONTAINER_USER /home/$_CONTAINER_USER/.local
 
 # Create the diploi-credential-helper
 cat > /usr/local/bin/diploi-credential-helper <<'EOT'
@@ -145,8 +145,7 @@ EOT
 # Setup PNPM
 mkdir -p /home/$_CONTAINER_USER/.pnpm-store
 chown $_CONTAINER_USER:$_CONTAINER_USER /home/$_CONTAINER_USER/.pnpm-store
-sudo -u $_CONTAINER_USER -H zsh -lc "COREPACK_ENABLE_DOWNLOAD_PROMPT=0 . /usr/local/share/nvm/nvm.sh && corepack enable pnpm && SHELL=/usr/bin/zsh pnpm setup && pnpm config set node-linker=hoisted --global && pnpm config set store-dir /home/$_CONTAINER_USER/.pnpm-store --global"
-
+sudo -u $_CONTAINER_USER -H zsh -lc "export PNPM_HOME=/home/$_CONTAINER_USER/.local/share/pnpm && export PNPM_CONFIG_NODE_LINKER=hoisted && export PNPM_CONFIG_MINIMUM_RELEASE_AGE=0 && export PNPM_CONFIG_STRICT_DEP_BUILDS=false && export PNPM_CONFIG_CONFIRM_MODULES_PURGE=false && export PATH=\"\$PNPM_HOME/bin:\$PNPM_HOME:\$PATH\" && COREPACK_ENABLE_DOWNLOAD_PROMPT=0 . /usr/local/share/nvm/nvm.sh && corepack enable pnpm && SHELL=/usr/bin/zsh pnpm setup && pnpm config set store-dir /home/$_CONTAINER_USER/.pnpm-store --global"
 echo "Creating Continue configuration file..."
 mkdir -p /home/$_CONTAINER_USER/.continue
 
