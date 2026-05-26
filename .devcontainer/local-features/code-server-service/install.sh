@@ -24,4 +24,5 @@ autorestart=false
 priority=20
 stdout_logfile=/var/log/supervisor/install-extensions.log
 stderr_logfile=/var/log/supervisor/install-extensions.err.log
+
 EOT
