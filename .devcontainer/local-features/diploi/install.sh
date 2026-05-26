@@ -200,3 +200,17 @@ EOT
 chmod +x /usr/local/bin/openclaw
 chmod +x /usr/local/bin/diploi-runonce.sh
 chmod +x /usr/local/bin/diploi-continue-setup.sh
+
+# Create supervisord entry for user specified init scripts
+cat <<EOT >> /etc/supervisord.conf
+; Added by diploi feature
+[program:diploi-init]
+command=/bin/bash -c 'if [ -f /etc/diploi/init.sh ]; then bash -e /etc/diploi/init.sh; fi'
+autostart=true
+autorestart=false
+startsecs=0
+priority=5
+stdout_logfile=/var/log/supervisor/diploi-init.log
+stderr_logfile=/var/log/supervisor/diploi-init.err.log
+
+EOT
