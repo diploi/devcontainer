@@ -148,8 +148,31 @@ chown $_CONTAINER_USER:$_CONTAINER_USER /home/$_CONTAINER_USER/.pnpm-store
 sudo -u $_CONTAINER_USER -H zsh -lc "export PNPM_HOME=/home/$_CONTAINER_USER/.local/share/pnpm && export PATH=\"\$PNPM_HOME/bin:\$PNPM_HOME:\$PATH\" && COREPACK_ENABLE_DOWNLOAD_PROMPT=0 . /usr/local/share/nvm/nvm.sh && corepack enable pnpm && SHELL=/usr/bin/zsh pnpm setup && pnpm config set store-dir /home/$_CONTAINER_USER/.pnpm-store --global"
 
 # Persist pnpm config env vars (removed from global config in newer pnpm versions)
-cat <<EOF >> /home/$_CONTAINER_USER/.zshrc
+cat <<'EOF' >> /home/$_CONTAINER_USER/.zshrc
 export PNPM_CONFIG_NODE_LINKER=hoisted
+export PNPM_CONFIG_MINIMUM_RELEASE_AGE=0
+export PNPM_CONFIG_STRICT_DEP_BUILDS=false
+
+# Fix missing global config for supportedArchitectures with PNPM v11
+pnpm() {
+  case "${1:-}" in install|i|add|update|up|remove|rm)
+    local root="$PWD"
+    while [[ "$root" != "/" && ! -f "$root/pnpm-workspace.yaml" ]]; do
+      root="${root:h}"
+    done
+    if [[ ! -f "$root/pnpm-workspace.yaml" ]]; then
+      root="$PWD"
+      while [[ "$root" != "/" && ! -f "$root/package.json" ]]; do
+        root="${root:h}"
+      done
+    fi
+    if [[ -f "$root/pnpm-workspace.yaml" ]] || [[ -f "$root/package.json" ]]; then
+      grep -qs "^supportedArchitectures:" "$root/pnpm-workspace.yaml" 2>/dev/null || \
+        printf '\nsupportedArchitectures:\n  libc:\n    - glibc\n    - musl\n' >> "$root/pnpm-workspace.yaml"
+    fi
+  esac
+  command pnpm "$@"
+}
 EOF
 
 echo "Creating Continue configuration file..."
