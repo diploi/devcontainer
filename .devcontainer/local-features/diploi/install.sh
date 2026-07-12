@@ -175,6 +175,10 @@ pnpm() {
 }
 EOF
 
+# Install opencode globally and symlink it to a stable path for supervisord and non-login shells
+bash -c '. /usr/local/share/nvm/nvm.sh && npm install -g opencode-ai'
+ln -sf "$(bash -c '. /usr/local/share/nvm/nvm.sh && command -v opencode')" /usr/local/bin/opencode
+
 echo "Creating Continue configuration file..."
 mkdir -p /home/$_CONTAINER_USER/.continue
 
@@ -232,6 +236,15 @@ chmod +x /usr/local/bin/diploi-continue-setup.sh
 # Create supervisord entry for user specified init scripts
 cat <<EOT >> /etc/supervisord.conf
 ; Added by diploi feature
+[program:diploi-fix-permissions]
+command=/bin/bash -c 'mkdir -p /home/$_CONTAINER_USER/.local && chown -R $_CONTAINER_USER:$_CONTAINER_USER /home/$_CONTAINER_USER/.local'
+autostart=true
+autorestart=false
+startsecs=0
+priority=2
+stdout_logfile=/var/log/supervisor/diploi-fix-permissions.log
+stderr_logfile=/var/log/supervisor/diploi-fix-permissions.err.log
+
 [program:diploi-init]
 command=/bin/bash -c 'if [ -f /etc/diploi/init.sh ]; then bash -e /etc/diploi/init.sh; fi'
 autostart=true
@@ -240,5 +253,18 @@ startsecs=0
 priority=5
 stdout_logfile=/var/log/supervisor/diploi-init.log
 stderr_logfile=/var/log/supervisor/diploi-init.err.log
+
+[program:opencode]
+directory=/app
+user=$_CONTAINER_USER
+environment=HOME="/home/$_CONTAINER_USER"
+command=/usr/local/bin/opencode serve --print-logs --log-level DEBUG --hostname 0.0.0.0 --port 4096
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true
+priority=30
+stdout_logfile=/var/log/supervisor/diploi-opencode.log
+stderr_logfile=/var/log/supervisor/diploi-opencode.err.log
 
 EOT
