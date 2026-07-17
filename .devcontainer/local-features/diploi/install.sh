@@ -109,6 +109,9 @@ cat > /etc/motd <<'EOT'
 
 EOT
 
+# Disable oh-my-zsh update prompts (must be set before oh-my-zsh.sh is sourced)
+sed -i '1s;^;zstyle ":omz:update" mode disabled\n;' /home/$_CONTAINER_USER/.zshrc
+
 # Set the SHELL ENV on login
 cat <<EOF >> /home/$_CONTAINER_USER/.zshrc
 export SHELL=/usr/bin/zsh
