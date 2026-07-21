@@ -52,7 +52,7 @@
     "ghcr.io/devcontainers-community/features/deno": {
       "version": "2.5.0"
     },
-    "ghcr.io/coder/devcontainer-features/code-server:1": {
+    "ghcr.io/coder/devcontainer-features/code-server:2": {
       "appName": "Diploi",
       "disableWorkspaceTrust": "true",
       "disableGettingStartedOverride": "true",
