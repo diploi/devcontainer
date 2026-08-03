@@ -16,7 +16,7 @@
       "dotnetRuntimeVersions": "10.0",
       "aspNetCoreRuntimeVersions": "10.0"
     },
-    "ghcr.io/devcontainers/features/node:1": {
+    "ghcr.io/devcontainers/features/node:2": {
       "version": "24"
     },
     "./local-features/bun": "latest",
