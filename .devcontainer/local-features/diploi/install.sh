@@ -97,10 +97,14 @@ cat > /etc/motd <<'EOT'
  [38;5;164m [39m[38;5;164m [39m[38;5;164m [39m[38;5;164m [39m[38;5;164m [39m[38;5;164m [39m[38;5;128m [39m[38;5;129m|[39m[38;5;129m_[39m[38;5;129m|[39m[38;5;129m [39m[38;5;129m [39m[38;5;129m [39m[38;5;93m [39m[38;5;93m [39m[38;5;93m [39m[38;5;93m [39m[38;5;93m [39m[38;5;93m [39m[38;5;63m [39m[38;5;63m [39m[38;5;63m[39m
 
  [0;37m👋 Welcome to your Diploi development environment!
-    - Your app processes are [1;37mnot[0;37m running here (like node or bun).
+    - Your application processes are [1;37mnot[0;37m running in this shell (for example, Node.js or Bun).
       To manage them, use the Diploi dashboard.
-    - You can run commands like "npm install" here.
-    - You can edit your code here. Changes are instantly reflected to all components.
+    - You can run commands here, for example "npm install".
+    - You can edit your code here. Changes are instantly reflected across all components.
+    - AI coding assistance is available in the terminal by typing "opencode".
+    - You can use the Diploi CLI to interact with other components.
+      Run commands in another component: "diploi exec <component-name>"
+      Or simply type "diploi" to see all available commands.
 
  👇 Learn more about remote development with Diploi:
     [38;5;128mhttps://diploi.com/dev[0;37m
