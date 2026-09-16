@@ -19,7 +19,9 @@
     "ghcr.io/devcontainers/features/node:2": {
       "version": "24"
     },
-    "./local-features/bun": "latest",
+    "./local-features/bun": {
+      "version": "1.4.2"
+    },
     "ghcr.io/va-h/devcontainers-features/uv:1": {
       "version": "latest"
     },
