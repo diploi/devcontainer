@@ -149,10 +149,10 @@ else
 fi
 EOT
 
-# Setup PNPM
+# Setup PNPM (pinned to v11)
 mkdir -p /home/$_CONTAINER_USER/.pnpm-store
 chown $_CONTAINER_USER:$_CONTAINER_USER /home/$_CONTAINER_USER/.pnpm-store
-sudo -u $_CONTAINER_USER -H zsh -lc "export PNPM_HOME=/home/$_CONTAINER_USER/.local/share/pnpm && export PATH=\"\$PNPM_HOME/bin:\$PNPM_HOME:\$PATH\" && COREPACK_ENABLE_DOWNLOAD_PROMPT=0 . /usr/local/share/nvm/nvm.sh && corepack enable pnpm && SHELL=/usr/bin/zsh pnpm setup && pnpm config set store-dir /home/$_CONTAINER_USER/.pnpm-store --global"
+sudo -u $_CONTAINER_USER -H zsh -lc "export PNPM_HOME=/home/$_CONTAINER_USER/.local/share/pnpm && export PATH=\"\$PNPM_HOME/bin:\$PNPM_HOME:\$PATH\" && COREPACK_ENABLE_DOWNLOAD_PROMPT=0 . /usr/local/share/nvm/nvm.sh && corepack enable pnpm && corepack install -g pnpm@11 && SHELL=/usr/bin/zsh pnpm setup && pnpm config set store-dir /home/$_CONTAINER_USER/.pnpm-store --global"
 
 # Persist pnpm config env vars (removed from global config in newer pnpm versions)
 cat <<'EOF' >> /home/$_CONTAINER_USER/.zshrc
