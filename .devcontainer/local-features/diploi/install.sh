@@ -288,3 +288,6 @@ stdout_logfile=/var/log/supervisor/diploi-opencode.log
 stderr_logfile=/var/log/supervisor/diploi-opencode.err.log
 
 EOT
+
+# Leftovers of the installs above, made as root: the user's tools can't write into them
+rm -rf /tmp/opencode /tmp/node-compile-cache
