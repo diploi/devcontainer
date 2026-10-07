@@ -6,6 +6,9 @@ set -eax
 mkdir -p /home/$_CONTAINER_USER/.local/share
 chown -R $_CONTAINER_USER:$_CONTAINER_USER /home/$_CONTAINER_USER/.local
 
+# Make /tmp world-writable (with sticky bit) so non-root users and agents can use it
+chmod 1777 /tmp
+
 # Create the diploi-credential-helper
 cat > /usr/local/bin/diploi-credential-helper <<'EOT'
 #!/bin/sh
@@ -98,18 +101,10 @@ cat > /etc/motd <<'EOT'
 
  [0;37m👋 Welcome to your Diploi development environment!
     - Your application processes are [1;37mnot[0;37m running in this shell (for example, Node.js or Bun).
-      To manage them, use the Diploi dashboard.
     - You can run commands here, for example "npm install".
     - You can edit your code here. Changes are instantly reflected across all components.
     - AI coding assistance is available in the terminal by typing "opencode".
-    - You can use the Diploi CLI to interact with other components.
-      Run commands in another component: "diploi exec <component-name>"
-      Or simply type "diploi" to see all available commands.
-
- 👇 Learn more about remote development with Diploi:
-    [38;5;128mhttps://diploi.com/dev[0;37m
-
- [1;37mHappy coding! ✨
+    - Check the Diploi CLI for more info. Type "diploi" to see all available commands.[0m
 
 EOT
 
@@ -183,7 +178,7 @@ pnpm() {
 EOF
 
 # Install opencode globally and symlink it to a stable path for supervisord and non-login shells
-bash -c '. /usr/local/share/nvm/nvm.sh && npm install -g opencode-ai'
+bash -c '. /usr/local/share/nvm/nvm.sh && npm install -g opencode-ai@~1.18.35'
 ln -sf "$(bash -c '. /usr/local/share/nvm/nvm.sh && command -v opencode')" /usr/local/bin/opencode
 
 echo "Creating Continue configuration file..."
@@ -244,7 +239,7 @@ chmod +x /usr/local/bin/diploi-continue-setup.sh
 cat <<EOT >> /etc/supervisord.conf
 ; Added by diploi feature
 [program:diploi-fix-permissions]
-command=/bin/bash -c 'mkdir -p /home/$_CONTAINER_USER/.local && chown -R $_CONTAINER_USER:$_CONTAINER_USER /home/$_CONTAINER_USER/.local'
+command=/bin/bash -c 'chmod 1777 /tmp; mkdir -p /home/$_CONTAINER_USER/.local && chown -R $_CONTAINER_USER:$_CONTAINER_USER /home/$_CONTAINER_USER/.local'
 autostart=true
 autorestart=false
 startsecs=0
