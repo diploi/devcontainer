@@ -181,6 +181,24 @@ EOF
 bash -c '. /usr/local/share/nvm/nvm.sh && npm install -g opencode-ai@~1.18.35'
 ln -sf "$(bash -c '. /usr/local/share/nvm/nvm.sh && command -v opencode')" /usr/local/bin/opencode
 
+# Playwright with a headless Chromium, so AI agents can check pages without installing browsers into the project.
+# Only the CLI wrapper and the shim use /opt/ms-playwright; a project's own Playwright keeps using ~/.cache/ms-playwright.
+bash -c '. /usr/local/share/nvm/nvm.sh && npm install --prefix /opt/playwright playwright@1.63.0'
+PLAYWRIGHT_BROWSERS_PATH=/opt/ms-playwright /opt/playwright/node_modules/.bin/playwright install --with-deps --only-shell chromium
+chown -R $_CONTAINER_USER:$_CONTAINER_USER /opt/ms-playwright
+rm -rf /var/lib/apt/lists/*
+mkdir -p /opt/playwright/global
+cat > /opt/playwright/global/playwright.js <<'EOT'
+process.env.PLAYWRIGHT_BROWSERS_PATH ??= '/opt/ms-playwright';
+module.exports = require('/opt/playwright/node_modules/playwright');
+EOT
+cat > /usr/local/bin/playwright <<'EOT'
+#!/bin/sh
+export PLAYWRIGHT_BROWSERS_PATH="${PLAYWRIGHT_BROWSERS_PATH:-/opt/ms-playwright}"
+exec /opt/playwright/node_modules/.bin/playwright "$@"
+EOT
+chmod +x /usr/local/bin/playwright
+
 echo "Creating Continue configuration file..."
 mkdir -p /home/$_CONTAINER_USER/.continue
 
@@ -259,7 +277,7 @@ stderr_logfile=/var/log/supervisor/diploi-init.err.log
 [program:opencode]
 directory=/app
 user=$_CONTAINER_USER
-environment=HOME="/home/$_CONTAINER_USER"
+environment=HOME="/home/$_CONTAINER_USER",NODE_PATH="/opt/playwright/global"
 command=/usr/local/bin/opencode serve --print-logs --log-level DEBUG --hostname 0.0.0.0 --port 4096
 autostart=true
 autorestart=true
